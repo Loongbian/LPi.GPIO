@@ -1,3 +1,7 @@
+PyObject *high;
+PyObject *low;
+PyObject *input;
+PyObject *output;
 
 PyObject *unknown;
 PyObject *board;
