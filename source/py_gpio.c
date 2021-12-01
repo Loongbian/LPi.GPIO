@@ -10,22 +10,22 @@ static PyObject* helloworld(PyObject* self, PyObject* args)
 // Our Module's Function Definition struct
 // We require this `NULL` to signal the end of our method
 // definition
-static PyMethodDef myMethods[] = {
+static PyMethodDef lpi_gpio_methods[] = {
     { "helloworld", helloworld, METH_NOARGS, "Prints Hello World" },
     { NULL, NULL, 0, NULL }
 };
 
 // Our Module Definition struct
-static struct PyModuleDef LPi = {
+static struct PyModuleDef lpigpiomodule = {
     PyModuleDef_HEAD_INIT,
-    "LPi",
+    "LPi.GPIO",      // name of module
     "Test Module",
     -1,
-    myMethods
+    lpi_gpio_methods
 };
 
 // Initializes our module using our above struct
-PyMODINIT_FUNC PyInit_LPi(void)
+PyMODINIT_FUNC PyInit_GPIO(void)
 {
-    return PyModule_Create(&LPi);
+    return PyModule_Create(&lpigpiomodule);
 }

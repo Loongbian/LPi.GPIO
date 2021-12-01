@@ -1,5 +1,5 @@
 import unittest
-import LPi as GPIO
+import LPi.GPIO as GPIO
 
 
 class Test(unittest.TestCase):

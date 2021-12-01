@@ -1,3 +1,3 @@
 from distutils.core import setup, Extension
-setup(name = 'LPi', version = '1.0',  \
-   ext_modules = [Extension('LPi', ['source/py_gpio.c'])])
+setup(name = 'LPi.GPIO', version = '1.0',  \
+   ext_modules = [Extension('LPi.GPIO', ['source/py_gpio.c'])])
