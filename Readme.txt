@@ -2,7 +2,7 @@
 sudo python3 setup.py install --record files.txt 
 
 # remove LPi.GPIO
-cat files.txt | sudo xargs rm -rf 
+sudo rm -rf build/ && cat files.txt | sudo xargs rm -rf 
 
 
 py_setup_channel()

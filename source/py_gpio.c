@@ -1,7 +1,29 @@
 #include "Python.h"
+#include "c_gpio.h"
 #include "common.h"
 #include "constants.h"
 
+
+static int mmap_gpio_mem(void)
+{
+   int result;
+
+   if (module_setup)    //common.h 
+      return 0;
+
+   printf("mmap_gpio_mem()->setup()[c_gpio.c]\n");
+   result = setup();    //c_gpio.c
+   if (result == SETUP_DEVMEM_FAIL)
+   {
+      PyErr_SetString(PyExc_RuntimeError, "No access to /dev/mem.  Try running as root!");
+      return 1;
+   } else { // result == SETUP_OK
+      module_setup = 1;
+      return 0;
+   }
+
+
+}
 
 // Function 1: A simple 'hello world' function
 static PyObject* helloworld(PyObject* self, PyObject* args)
@@ -34,21 +56,30 @@ static PyObject *py_setup_channel(PyObject *self, PyObject *args, PyObject *kwar
    static char *kwlist[] = {"channel", "direction", "initial", NULL};
 
    int setup_one(void) {
+	   
+//      if (get_gpio_number(channel, &gpio))
+//         return 0;  
+      printf("channel->gpio: %d\n",gpio);
+      setup_gpio(gpio, direction);
+      gpio_direction[gpio] = direction;
       return 1;
    }
 
 
+   printf("setup()->py_setup_channel()\n");
 
    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "Oi|ii", kwlist, &chanlist, &direction, &initial))
       return NULL;
    
-   printf("directon is %d\n", direction);
-   printf("initial is %d\n",initial);
+  // printf("directon is %d\n", direction);
+  // printf("initial is %d\n",initial);
 
-/*
-   if (mmap_gpio_mem())
+
+   if (mmap_gpio_mem()) {
+      printf("Failed mmap:gpio->mem");
       return NULL;
-*/
+   }
+
    /*
    if (chanlist) {
        chancount = PyList_Size(chanlist);
@@ -60,7 +91,7 @@ static PyObject *py_setup_channel(PyObject *self, PyObject *args, PyObject *kwar
        Py_RETURN_NONE;
    }
 
-
+   
    for (i=0; i<chancount; i++) {
       if (chanlist) {
          if ((tempobj = PyList_GetItem(chanlist, i)) == NULL) {
@@ -79,12 +110,45 @@ static PyObject *py_setup_channel(PyObject *self, PyObject *args, PyObject *kwar
    }
    */
 
+   if (!setup_one())
+	 return NULL;
+
    Py_RETURN_NONE;
 }
 
 // python function output(channel(s), value(s))
 static PyObject *py_output_gpio(PyObject *self, PyObject *args)
 {
+   unsigned int gpio;
+   int channel = -1;
+   int value = -1;
+   PyObject *chanlist = NULL;
+   PyObject *valuelist = NULL;
+
+
+   int output(void) {
+//      if (get_gpio_number(channel, &gpio))
+//          return 0;
+
+      printf("gpio:%d\n", gpio);
+      output_gpio(gpio, value);
+      return 1;
+
+
+   }
+
+   if (!PyArg_ParseTuple(args, "OO", &chanlist, &valuelist))
+      return NULL;
+
+   if (PyLong_Check(chanlist)) 
+      channel = (int)PyLong_AsLong(chanlist);
+
+   if (PyLong_Check(valuelist)) 
+      value = (int)PyLong_AsLong(valuelist);
+
+   printf("channel:%d value:%d", channel, value);
+   if (!output())
+      return NULL;
 
    Py_RETURN_NONE;
 }
@@ -93,8 +157,9 @@ static PyObject *py_output_gpio(PyObject *self, PyObject *args)
 static PyObject *py_setmode(PyObject *self, PyObject *args)
 {
    int new_mode;
-   
-   if (!PyArg_ParseTuple(args, "i", &new_mode))
+  
+   printf("setmode()->py_setmod()\n"); 
+   if (!PyArg_ParseTuple(args, "i", &new_mode)) 
       return NULL;
 
 
@@ -133,9 +198,11 @@ PyMODINIT_FUNC PyInit_GPIO(void)
       return NULL;
 
    define_constants(module);
+   
+   pin_to_gpio = &pin_to_gpio_rev;
+
 
    return module;
-
 
 
 //    return PyModule_Create(&lpigpiomodule);

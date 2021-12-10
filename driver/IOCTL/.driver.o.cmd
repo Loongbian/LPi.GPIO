@@ -1,10 +1,8 @@
-cmd_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := gcc -Wp,-MD,/home/loongson/LPi/LPi.GPIO/driver/gpio/.driver.mod.o.d  -nostdinc -isystem /usr/lib/gcc/mips64el-linux-gnuabi64/8/include -I./arch/mips/include -I./arch/mips/include/generated  -I./include -I./arch/mips/include/uapi -I./arch/mips/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -DVMLINUX_LOAD_ADDRESS=0xffffffff80200000 -DDATAOFFSET=0 -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Wno-format-security -std=gnu89 -mmcount-ra-address -DKBUILD_MCOUNT_RA_ADDRESS -mno-check-zero-division -mabi=64 -G 0 -mno-abicalls -fno-pic -pipe -msoft-float -DGAS_HAS_SET_HARDFLOAT -Wa,-msoft-float -ffreestanding -fno-stack-check -DTOOLCHAIN_SUPPORTS_MSA -DTOOLCHAIN_SUPPORTS_VIRT -DTOOLCHAIN_SUPPORTS_XPA -DTOOLCHAIN_SUPPORTS_CRC -DTOOLCHAIN_SUPPORTS_DSP -DTOOLCHAIN_SUPPORTS_GINV -Wa,--trap -Wa,-mno-fix-loongson3-llsc -march=loongson3a -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS64 -mno-loongson-mmi -I./arch/mips/include/asm/mach-loongson64 -mno-branch-likely -I./arch/mips/include/asm/mach-generic -msym32 -DKBUILD_64BIT_SYM32 -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wno-unused-but-set-variable -Wimplicit-fallthrough -Wno-unused-const-variable -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-merge-all-constants -fmerge-constants -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -fmacro-prefix-map=./= -Wno-packed-not-aligned  -DMODULE -mlong-calls  -DKBUILD_BASENAME='"driver.mod"' -DKBUILD_MODNAME='"driver"' -c -o /home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o /home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.c
+cmd_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o := gcc -Wp,-MD,/home/loongson/LPi/LPi.GPIO/driver/IOCTL/.driver.o.d  -nostdinc -isystem /usr/lib/gcc/mips64el-linux-gnuabi64/8/include -I./arch/mips/include -I./arch/mips/include/generated  -I./include -I./arch/mips/include/uapi -I./arch/mips/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -DVMLINUX_LOAD_ADDRESS=0xffffffff80200000 -DDATAOFFSET=0 -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Wno-format-security -std=gnu89 -mmcount-ra-address -DKBUILD_MCOUNT_RA_ADDRESS -mno-check-zero-division -mabi=64 -G 0 -mno-abicalls -fno-pic -pipe -msoft-float -DGAS_HAS_SET_HARDFLOAT -Wa,-msoft-float -ffreestanding -fno-stack-check -DTOOLCHAIN_SUPPORTS_MSA -DTOOLCHAIN_SUPPORTS_VIRT -DTOOLCHAIN_SUPPORTS_XPA -DTOOLCHAIN_SUPPORTS_CRC -DTOOLCHAIN_SUPPORTS_DSP -DTOOLCHAIN_SUPPORTS_GINV -Wa,--trap -Wa,-mno-fix-loongson3-llsc -march=loongson3a -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS64 -mno-loongson-mmi -I./arch/mips/include/asm/mach-loongson64 -mno-branch-likely -I./arch/mips/include/asm/mach-generic -msym32 -DKBUILD_64BIT_SYM32 -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wno-unused-but-set-variable -Wimplicit-fallthrough -Wno-unused-const-variable -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-merge-all-constants -fmerge-constants -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -fmacro-prefix-map=./= -Wno-packed-not-aligned  -DMODULE -mlong-calls  -DKBUILD_BASENAME='"driver"' -DKBUILD_MODNAME='"driver"' -c -o /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.c
 
-source_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := /home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.c
+source_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o := /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.c
 
-deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
-    $(wildcard include/config/module/unload.h) \
-    $(wildcard include/config/retpoline.h) \
+deps_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o := \
   include/linux/kconfig.h \
     $(wildcard include/config/cpu/big/endian.h) \
     $(wildcard include/config/booger.h) \
@@ -15,33 +13,24 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
     $(wildcard include/config/cc/has/asm/inline.h) \
   include/linux/compiler_attributes.h \
   include/linux/compiler-gcc.h \
+    $(wildcard include/config/retpoline.h) \
     $(wildcard include/config/arch/use/builtin/bswap.h) \
   arch/mips/include/asm/compiler.h \
     $(wildcard include/config/cc/is/gcc.h) \
     $(wildcard include/config/cpu/micromips.h) \
     $(wildcard include/config/cpu/mipsr6.h) \
-  include/linux/module.h \
-    $(wildcard include/config/modules.h) \
-    $(wildcard include/config/sysfs.h) \
-    $(wildcard include/config/modules/tree/lookup.h) \
-    $(wildcard include/config/livepatch.h) \
-    $(wildcard include/config/unused/symbols.h) \
-    $(wildcard include/config/module/sig.h) \
-    $(wildcard include/config/generic/bug.h) \
-    $(wildcard include/config/kallsyms.h) \
-    $(wildcard include/config/smp.h) \
-    $(wildcard include/config/tracepoints.h) \
-    $(wildcard include/config/tree/srcu.h) \
-    $(wildcard include/config/bpf/events.h) \
-    $(wildcard include/config/jump/label.h) \
+  include/linux/kernel.h \
+    $(wildcard include/config/preempt/voluntary.h) \
+    $(wildcard include/config/debug/atomic/sleep.h) \
+    $(wildcard include/config/preempt/rt.h) \
+    $(wildcard include/config/mmu.h) \
+    $(wildcard include/config/prove/locking.h) \
+    $(wildcard include/config/panic/timeout.h) \
     $(wildcard include/config/tracing.h) \
-    $(wildcard include/config/event/tracing.h) \
     $(wildcard include/config/ftrace/mcount/record.h) \
-    $(wildcard include/config/constructors.h) \
-    $(wildcard include/config/function/error/injection.h) \
-    $(wildcard include/config/strict/module/rwx.h) \
-  include/linux/list.h \
-    $(wildcard include/config/debug/list.h) \
+  /usr/lib/gcc/mips64el-linux-gnuabi64/8/include/stdarg.h \
+  include/linux/limits.h \
+  include/uapi/linux/limits.h \
   include/linux/types.h \
     $(wildcard include/config/have/uid16.h) \
     $(wildcard include/config/uid16.h) \
@@ -63,22 +52,6 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
   arch/mips/include/uapi/asm/posix_types.h \
   arch/mips/include/uapi/asm/sgidefs.h \
   include/uapi/asm-generic/posix_types.h \
-  include/linux/poison.h \
-    $(wildcard include/config/illegal/pointer/value.h) \
-    $(wildcard include/config/page/poisoning/zero.h) \
-  include/linux/const.h \
-  include/vdso/const.h \
-  include/uapi/linux/const.h \
-  include/linux/kernel.h \
-    $(wildcard include/config/preempt/voluntary.h) \
-    $(wildcard include/config/debug/atomic/sleep.h) \
-    $(wildcard include/config/preempt/rt.h) \
-    $(wildcard include/config/mmu.h) \
-    $(wildcard include/config/prove/locking.h) \
-    $(wildcard include/config/panic/timeout.h) \
-  /usr/lib/gcc/mips64el-linux-gnuabi64/8/include/stdarg.h \
-  include/linux/limits.h \
-  include/uapi/linux/limits.h \
   include/vdso/limits.h \
   include/linux/linkage.h \
     $(wildcard include/config/x86.h) \
@@ -87,7 +60,9 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
     $(wildcard include/config/modversions.h) \
     $(wildcard include/config/module/rel/crcs.h) \
     $(wildcard include/config/have/arch/prel32/relocations.h) \
+    $(wildcard include/config/modules.h) \
     $(wildcard include/config/trim/unused/ksyms.h) \
+    $(wildcard include/config/unused/symbols.h) \
   arch/mips/include/asm/linkage.h \
   include/linux/compiler.h \
     $(wildcard include/config/trace/branch/profiling.h) \
@@ -100,8 +75,12 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
     $(wildcard include/config/cpu/has/wb.h) \
     $(wildcard include/config/weak/ordering.h) \
     $(wildcard include/config/weak/reordering/beyond/llsc.h) \
+    $(wildcard include/config/smp.h) \
     $(wildcard include/config/cpu/loongson3/workarounds.h) \
   arch/mips/include/asm/addrspace.h \
+  include/linux/const.h \
+  include/vdso/const.h \
+  include/uapi/linux/const.h \
   arch/mips/include/asm/sync.h \
     $(wildcard include/config/cpu/has/sync.h) \
   arch/mips/include/asm/wbflush.h \
@@ -195,13 +174,34 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
     $(wildcard include/config/dynamic/debug.h) \
   include/linux/init.h \
     $(wildcard include/config/strict/kernel/rwx.h) \
+    $(wildcard include/config/strict/module/rwx.h) \
   include/linux/kern_levels.h \
   include/linux/dynamic_debug.h \
+    $(wildcard include/config/jump/label.h) \
   include/linux/jump_label.h \
     $(wildcard include/config/have/arch/jump/label/relative.h) \
   arch/mips/include/asm/jump_label.h \
   arch/mips/include/asm/div64.h \
   include/asm-generic/div64.h \
+  include/linux/module.h \
+    $(wildcard include/config/sysfs.h) \
+    $(wildcard include/config/modules/tree/lookup.h) \
+    $(wildcard include/config/livepatch.h) \
+    $(wildcard include/config/module/sig.h) \
+    $(wildcard include/config/generic/bug.h) \
+    $(wildcard include/config/kallsyms.h) \
+    $(wildcard include/config/tracepoints.h) \
+    $(wildcard include/config/tree/srcu.h) \
+    $(wildcard include/config/bpf/events.h) \
+    $(wildcard include/config/event/tracing.h) \
+    $(wildcard include/config/module/unload.h) \
+    $(wildcard include/config/constructors.h) \
+    $(wildcard include/config/function/error/injection.h) \
+  include/linux/list.h \
+    $(wildcard include/config/debug/list.h) \
+  include/linux/poison.h \
+    $(wildcard include/config/illegal/pointer/value.h) \
+    $(wildcard include/config/page/poisoning/zero.h) \
   include/linux/stat.h \
   arch/mips/include/uapi/asm/stat.h \
   include/uapi/linux/stat.h \
@@ -843,24 +843,89 @@ deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o := \
   include/linux/tracepoint-defs.h \
   include/linux/static_key.h \
   arch/mips/include/asm/module.h \
-  include/linux/build-salt.h \
-    $(wildcard include/config/build/salt.h) \
-  include/linux/elfnote.h \
-  include/linux/vermagic.h \
-  include/generated/utsrelease.h \
-  arch/mips/include/asm/vermagic.h \
-    $(wildcard include/config/cpu/mips32/r1.h) \
-    $(wildcard include/config/cpu/mips32/r2.h) \
-    $(wildcard include/config/cpu/mips32/r6.h) \
-    $(wildcard include/config/cpu/mips64/r1.h) \
-    $(wildcard include/config/cpu/mips64/r2.h) \
-    $(wildcard include/config/cpu/mips64/r6.h) \
-    $(wildcard include/config/cpu/r4x00.h) \
-    $(wildcard include/config/cpu/tx49xx.h) \
-    $(wildcard include/config/cpu/r5000.h) \
-    $(wildcard include/config/cpu/nevada.h) \
-    $(wildcard include/config/cpu/rm7000.h) \
+  include/linux/cdev.h \
+  include/linux/device.h \
+    $(wildcard include/config/debug/devres.h) \
+    $(wildcard include/config/generic/msi/irq/domain.h) \
+    $(wildcard include/config/pinctrl.h) \
+    $(wildcard include/config/generic/msi/irq.h) \
+    $(wildcard include/config/dma/declare/coherent.h) \
+    $(wildcard include/config/dma/cma.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/device.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/cpu.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/cpu/all.h) \
+    $(wildcard include/config/of.h) \
+    $(wildcard include/config/devtmpfs.h) \
+    $(wildcard include/config/sysfs/deprecated.h) \
+  include/linux/dev_printk.h \
+  include/linux/ioport.h \
+  include/linux/klist.h \
+  include/linux/pm.h \
+    $(wildcard include/config/vt/console/sleep.h) \
+    $(wildcard include/config/pm.h) \
+    $(wildcard include/config/pm/clk.h) \
+    $(wildcard include/config/pm/generic/domains.h) \
+  include/linux/overflow.h \
+  include/linux/device/bus.h \
+    $(wildcard include/config/acpi.h) \
+  include/linux/device/class.h \
+  include/linux/device/driver.h \
+  arch/mips/include/generated/asm/device.h \
+  include/asm-generic/device.h \
+  include/linux/pm_wakeup.h \
+  include/linux/slab.h \
+    $(wildcard include/config/debug/slab.h) \
+    $(wildcard include/config/failslab.h) \
+    $(wildcard include/config/have/hardened/usercopy/allocator.h) \
+    $(wildcard include/config/slab.h) \
+    $(wildcard include/config/slub.h) \
+    $(wildcard include/config/slob.h) \
+  include/linux/percpu-refcount.h \
+  include/linux/kasan.h \
+    $(wildcard include/config/kasan/vmalloc.h) \
+    $(wildcard include/config/kasan/generic.h) \
+    $(wildcard include/config/kasan/inline.h) \
+  arch/mips/include/asm/mach-loongson64/loongson-2k.h \
+  include/linux/irq.h \
+    $(wildcard include/config/generic/irq/effective/aff/mask.h) \
+    $(wildcard include/config/generic/irq/ipi.h) \
+    $(wildcard include/config/irq/domain/hierarchy.h) \
+    $(wildcard include/config/generic/irq/migration.h) \
+    $(wildcard include/config/generic/pending/irq.h) \
+    $(wildcard include/config/hardirqs/sw/resend.h) \
+    $(wildcard include/config/generic/irq/legacy/alloc/hwirq.h) \
+    $(wildcard include/config/generic/irq/legacy.h) \
+    $(wildcard include/config/generic/irq/multi/handler.h) \
+  include/linux/irqhandler.h \
+  include/linux/irqreturn.h \
+  include/linux/irqnr.h \
+  include/uapi/linux/irqnr.h \
+  arch/mips/include/asm/irq.h \
+    $(wildcard include/config/i8259.h) \
+  include/linux/irqdomain.h \
+    $(wildcard include/config/generic/irq/debugfs.h) \
+    $(wildcard include/config/irq/domain.h) \
+  include/linux/of.h \
+    $(wildcard include/config/of/dynamic.h) \
+    $(wildcard include/config/sparc.h) \
+    $(wildcard include/config/of/promtree.h) \
+    $(wildcard include/config/of/kobj.h) \
+    $(wildcard include/config/of/numa.h) \
+    $(wildcard include/config/of/overlay.h) \
+  include/linux/mod_devicetable.h \
+  include/linux/property.h \
+  include/linux/fwnode.h \
+  arch/mips/include/asm/mipsmtregs.h \
+  arch/mips/include/asm/mach-loongson64/irq.h \
+  arch/mips/include/asm/mach-generic/irq.h \
+    $(wildcard include/config/irq/cpu/rm7k.h) \
+  arch/mips/include/asm/irq_regs.h \
+  include/linux/irqdesc.h \
+    $(wildcard include/config/irq/preflow/fasteoi.h) \
+    $(wildcard include/config/sparse/irq.h) \
+    $(wildcard include/config/handle/domain/irq.h) \
+  arch/mips/include/asm/hw_irq.h \
 
-/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o: $(deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o)
+/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o: $(deps_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o)
 
-$(deps_/home/loongson/LPi/LPi.GPIO/driver/gpio/driver.mod.o):
+$(deps_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o):
