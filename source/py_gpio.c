@@ -35,6 +35,46 @@ static PyObject* helloworld(PyObject* self, PyObject* args)
 // python function cleanup(channel=None)
 static PyObject *py_cleanup(PyObject *self, PyObject *args, PyObject *kwargs)
 {
+   unsigned int gpio;
+
+   int chancount = -666;
+   int channel = -666;
+
+   PyObject *chanlist = NULL;
+   PyObject *chantuple = NULL;
+   PyObject *tempobj;
+   
+   static char *kwlist[] = {"channel", NULL};
+
+   void cleanup_one(void)
+   {
+
+
+   }
+
+
+   printf("cleanup()\n");
+   if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|O", kwlist, &chanlist))
+      return NULL;
+
+   if (chanlist == NULL) {  // channel kwarg not set
+      // do nothing
+   } else if (PyLong_Check(chanlist)) {
+      channel = (int)PyLong_AsLong(chanlist);
+      if (PyErr_Occurred())
+         return NULL;
+      chanlist = NULL;
+   } else if (PyList_Check(chanlist)) {
+      chancount = PyList_Size(chanlist);
+   } else if (PyTuple_Check(chanlist)) {
+      chantuple = chanlist;
+      chanlist = NULL;
+   } else {
+      // raise exception
+      PyErr_SetString(PyExc_ValueError, "Channel must be an integer or list/tuple of integers");
+      return NULL;
+   }
+
 
    Py_RETURN_NONE;
 }
@@ -70,17 +110,42 @@ static PyObject *py_setup_channel(PyObject *self, PyObject *args, PyObject *kwar
 
    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "Oi|ii", kwlist, &chanlist, &direction, &initial))
       return NULL;
-   
-  // printf("directon is %d\n", direction);
-  // printf("initial is %d\n",initial);
 
+   if (PyLong_Check(chanlist)) {
+      channel = (int)PyLong_AsLong(chanlist);
 
-   if (mmap_gpio_mem()) {
-      printf("Failed mmap:gpio->mem");
+      if (PyErr_Occurred())
+         return NULL;
+      chanlist = NULL;
+
+   } else if (PyList_Check(chanlist)) {
+      // do nothing
+   } else if (PyTuple_Check(chanlist)) {
+      chantuple = chanlist;
+      chanlist = NULL;
+   } else {
+      // raise exception
+      PyErr_SetString(PyExc_ValueError, "Channel must be an integer or list/tuple of integers");
       return NULL;
    }
 
-   /*
+   // printf("setup: chanlist  is OK\n");
+   
+
+  //  if (mmap_gpio_mem()) {
+  //    printf("Failed mmap:gpio->mem");
+  //    return NULL;
+  // }
+
+   if (direction != INPUT && direction != OUTPUT) {
+      PyErr_SetString(PyExc_ValueError, "An invalid direction was passed to setup()");
+
+      printf("direction: is %d\n",direction);
+      return 0;
+   }
+
+   printf("direction: is %d\n",direction);
+   
    if (chanlist) {
        chancount = PyList_Size(chanlist);
    } else if (chantuple) {
@@ -91,7 +156,7 @@ static PyObject *py_setup_channel(PyObject *self, PyObject *args, PyObject *kwar
        Py_RETURN_NONE;
    }
 
-   
+   /*
    for (i=0; i<chancount; i++) {
       if (chanlist) {
          if ((tempobj = PyList_GetItem(chanlist, i)) == NULL) {
@@ -137,6 +202,7 @@ static PyObject *py_output_gpio(PyObject *self, PyObject *args)
 
    }
 
+   printf("output()\n");
    if (!PyArg_ParseTuple(args, "OO", &chanlist, &valuelist))
       return NULL;
 
@@ -163,7 +229,7 @@ static PyObject *py_setmode(PyObject *self, PyObject *args)
       return NULL;
 
 
-   gpio_mode = new_mode;
+   gpio_mode = new_mode;     // common.h
    Py_RETURN_NONE;
 }
 

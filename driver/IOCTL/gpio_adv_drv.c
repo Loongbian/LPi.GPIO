@@ -19,7 +19,7 @@
 #include<linux/uaccess.h>              //copy_to/from_user()
 #include <linux/ioctl.h>
 #include <loongson-2k.h>
-
+#include <gpio_adv_drv.h>
  
  
 #define WR_VALUE _IOW('a','a',int32_t*)
@@ -130,6 +130,12 @@ static ssize_t ls2k_gpio_write(struct file *filp, const char __user *buf, size_t
 static long ls2k_gpio_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
          switch(cmd) {
+	       /*
+		*GPIO Common
+		*/
+		case IOCTL_GPIO_GET_MODE:
+			break;
+
                 case WR_VALUE:
                         if( copy_from_user(&value ,(int32_t*) arg, sizeof(value)) )
                         {

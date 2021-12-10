@@ -1,1 +1,0 @@
-cmd_/home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.ko := ld -r  -m elf64ltsmip  --build-id  -T ./scripts/module-common.lds -o /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.ko /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.o /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.mod.o;  make -f ./arch/mips/Makefile.postlink /home/loongson/LPi/LPi.GPIO/driver/IOCTL/driver.ko

@@ -2,7 +2,7 @@
 #define BOARD        10
 #define BCM          11 //#define LS 11
 
-int gpio_mode;
+int gpio_mode;       // BOARD or BCM 
 const int (*pin_to_gpio_rev)[61];
 const int (*pin_to_gpio)[61];
 int gpio_direction[74];
