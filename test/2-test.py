@@ -1,6 +1,6 @@
 import LPi.GPIO as GPIO
 
-LED_PIN = 7
+LED_PIN = 13
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LED_PIN, GPIO.OUT)

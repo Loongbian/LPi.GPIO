@@ -38,7 +38,7 @@ void gpio41_callback(int gpio_num)
 int main()
 {
 
-/*	
+	
         int fd_gpio;
 	int i;
         int32_t value, number;
@@ -49,7 +49,7 @@ int main()
                 printf("Cannot open device file...\n");
                 return 0;
         }
-
+/*
 	// enable	
         //__gpio_in_enable(fd_gpio, IN1, 1);
 	//printf("gpio in enable\n ");

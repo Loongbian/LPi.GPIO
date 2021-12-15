@@ -22,6 +22,7 @@ static int f_gpio_drv = 0;  /* 驱动文件句柄 */
 int gpio_in_enable(int gpio_num, int inverse)
 {
     // CHECK_FILE_HANDLE();
+    printf("gpio_in_enable\n");
     return ioctl(f_gpio_drv, IOCTL_IN_ENABLE, PACK_16_16(gpio_num, inverse));
 }
 

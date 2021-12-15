@@ -1,6 +1,9 @@
 int setup(void);
 void setup_gpio(int gpio, int direction);
 void output_gpio(int gpio, int value);
+int input_gpio(int gpio);
+void cleanup(void);
+
 
 
 #define SETUP_OK           0

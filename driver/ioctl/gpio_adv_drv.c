@@ -14,6 +14,10 @@
 #include <linux/device.h>
 #include<linux/slab.h>                 //kmalloc()
 #include<linux/uaccess.h>              //copy_to/from_user()
+#include <linux/kmod.h>
+#include <linux/sched.h>
+#include <linux/delay.h>
+#include <linux/kthread.h>
 #include <linux/ioctl.h>
 #include <loongson-2k.h>
 #include <gpio_adv_drv.h>
@@ -40,6 +44,10 @@ dev_t dev = 0;
 static struct class *dev_class;
 static struct cdev ls2k_gpio_cdev;
 
+// practice
+struct task_struct *task_p = NULL;
+
+
 #define CBS_MAX         5
 
 #define DBG_GPIO_IN(...)    printk(__VA_ARGS__)
@@ -62,6 +70,15 @@ typedef struct
      *
      */
     int             in_inverse;             // 输入：电平反相
+
+    int             trigger_mode;	    // 触发方式
+
+    int             bounce_ms;              // 按键去抖毫秒数
+    unsigned int    bounce_ticks;
+    int             bounce_on;		    // 处于去抖状态
+    int             bounce_value;	    // 去抖保存的按键值
+    int             bounce_edge;	    // 去抖保存边沿值，IO_EDGE_RISING/IO_EDGE_FALLING
+
 
     /**************************************************************************
      * OUT 工作模式相关参数
@@ -290,6 +307,12 @@ static int gpio_in_get_value(int gpio_num, unsigned int *in_val)
  */
 static int gpio_in_get_all_values(uint64_t *p_val64)
 {
+	uint64_t in64;
+
+	pr_info("gpio_in_get_all_values\n");
+	in64 = ls2k_readq(GPIO_I);
+	*p_val64 = in64;
+
 	return 0;
 }
 
@@ -511,7 +534,107 @@ static long ls2k_gpio_ioctl(struct file *file, unsigned int cmd, unsigned long a
         }
         return 0;
 }
- 
+
+
+/*
+ * GPIO IN 边沿触发处理
+ *
+ * edge: 当前发生的边沿变化，IN_EDGE_RISING/IN_EDGE_FALLING
+ *
+ */
+static void gpio_in_edge_changed(gpio_desc_t *p_gpio, int edge, int val)
+{
+
+	
+	pr_info("gpio_in_edge_changed\n");
+
+	/*
+	 * 仅处理上升沿和下降沿
+	 */
+	if (!((p_gpio->trigger_mode == IN_EDGE_RISING) ||
+          (p_gpio->trigger_mode == IN_EDGE_FALLING)))
+        	return;
+
+
+
+}
+
+/*
+ *
+ * 线程，轮询GPIO输入口的数据，检查是否有电平变化
+ */
+int gpio_in_monitor_task(void *arg)
+{
+	static uint64_t last_inputs;
+        int n = 0;
+
+
+	pr_info("gpio_in_monitor_task\n");
+	gpio_in_get_all_values(&last_inputs);  /*初值*/
+
+        while(1)
+        {
+                // printk("%s: %d\n",__func__,n++);
+		uint64_t rd_inputs, v_changed;
+		/*
+		 * 读取当前GPIO IN的值，和保存的值进行“异或”运算
+		 */
+		if (gpio_in_get_all_values(&rd_inputs) < 0)
+		{
+			msleep(10);		
+                      //ssleep(3);
+		        continue;
+		}
+
+		v_changed = rd_inputs ^ last_inputs;
+		if (v_changed)
+		{
+			int i, edge;
+			last_inputs = rd_inputs;  /*保存的数据*/
+
+			for (i=0; i<GPIO_COUNT; i++)
+			{
+				gpio_desc_t *p = &gpios[i];
+
+				 if ((p->work_mode == GPIO_IN) &&
+					(p->bounce_on == 0) &&
+					(v_changed & 0x1))
+				 {
+					  edge = (rd_inputs & 0x1) ?
+						  IN_EDGE_RISING :     /* 0--->1 上升沿 */
+						  IN_EDGE_FALLING;     /* 1--->0 下降沿 */
+
+					  //gpio_in_edge_changed(p, edge, rd_inputs & 0x1);
+				 }
+
+				 v_changed >>= 1;		       /* 检测下一位 */
+				 rd_inputs >>= 1;
+			}
+		}
+
+		msleep(10);   // task sleep 10 ms
+
+        	if(kthread_should_stop())
+                {
+                        break;
+                }
+
+        }
+
+        return 0;
+}
+
+static int gpio_in_monitor_create(void *arg)
+{
+        printk("gpio_in_monitor_create %s:\n",__func__);
+        task_p = kthread_create(gpio_in_monitor_task,NULL,"practice task"); 
+        if(!IS_ERR(task_p)) {
+                wake_up_process(task_p);
+	}
+
+	return 0;
+}
+
 /*
 ** Module Init function
 */
@@ -544,6 +667,16 @@ static int __init ls2k_gpio_driver_init(void)
             pr_err("Cannot create the Device 1\n");
             goto r_device;
         }
+
+	/*	
+	// practice
+        printk("%s:\n",__func__);
+        practice_task_p = kthread_create(my_kernel_thread,NULL,"practice task"); 
+        if(!IS_ERR(practice_task_p))
+                wake_up_process(practice_task_p);
+
+	*/
+
         pr_info("Device Driver Insert...Done!!!\n");
         return 0;
  
@@ -563,6 +696,11 @@ static void __exit ls2k_gpio_driver_exit(void)
         class_destroy(dev_class);
         cdev_del(&ls2k_gpio_cdev);
         unregister_chrdev_region(dev, 1);
+
+	// practice
+        printk("%s:\n",__func__);
+        kthread_stop(task_p);
+	
         pr_info("Device Driver Remove...Done!!!\n");
 }
  
